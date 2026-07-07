@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acode Scary Cast</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #0a0a0a; color: #eee; padding: 20px; }
+        .container { max-width: 400px; margin: 0 auto; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333; }
+        h1 { color: #d32f2f; }
+        button { background: #d32f2f; color: white; border: none; padding: 15px 24px; font-size: 1rem; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; }
+        button:hover { background: #b71c1c; }
+        img { width: 100%; border-radius: 8px; margin-top: 20px; border: 2px solid #333; }
+    </style>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+</head>
+<body>
 
+<div class="container">
+    <h1>💀 Scary Cast</h1>
+    <p>テレビに怪しい森を映し出します...</p>
+    <img src="http://googleusercontent.com/image_generation_content/304" alt="怖い森">
+    <button id="castBtn">📺 テレビにキャストする</button>
+</div>
+
+<script>
+    const IMAGE_URL = "http://googleusercontent.com/image_generation_content/304";
+
+    window.__onGCastApiAvailable = function(isAvailable) {
+        if (isAvailable) {
+            cast.framework.CastContext.getInstance().setOptions({
+                receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGINAL_SCOPED
+            });
+        }
+    };
+
+    document.getElementById('castBtn').addEventListener('click', () => {
+        const context = cast.framework.CastContext.getInstance();
+        context.requestSession().then(() => {
+            const session = context.getCurrentSession();
+            
+            // 画像をテレビに送信する処理
+            const mediaInfo = new chrome.cast.media.MediaInfo(IMAGE_URL, 'image/jpeg');
+            const request = new chrome.cast.media.LoadRequest(mediaInfo);
+            
+            session.loadMedia(request).then(() => {
+                alert("テレビに森が映し出されました…");
+            });
+        }).catch((err) => {
+            alert("接続できませんでした。");
+        });
+    });
+</script>
+
+</body>
+</html>
