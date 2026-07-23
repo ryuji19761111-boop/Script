@@ -1,38 +1,22 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Model Viewer</title>
-  <!-- Googleのmodel-viewerコンポーネントを読み込み -->
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #1a1a1a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    model-viewer {
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+<meta charset="UTF-8">
+
+<script type="module"
+src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+</script>
+
 </head>
+
 <body>
 
-  <!-- 3Dモデル表示用タグ -->
-  <model-viewer 
-    src="model.glb" 
-    alt="3D Model" 
-    camera-controls 
-    auto-rotate 
-    shadow-intensity="1">
-  </model-viewer>
+<model-viewer
+src="DamagedHelmet.glb"
+camera-controls
+auto-rotate
+style="width:100%; height:100vh;">
+</model-viewer>
 
 </body>
 </html>
